@@ -1,0 +1,193 @@
+* html ul li { height: 1% }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #eee;
+  overflow-x: hidden
+}
+#wrapper {
+  margin: 0 0 20px 320px;
+  width: 550px;
+  border-right: 3px solid #DDD;
+  border-left: 3px solid #DDD;
+  border-bottom: 3px solid #DDD;
+  background: #fff url(../i/eburhan2.png) top right no-repeat;
+  padding: 20px 20px 10px 0;
+  -moz-border-radius: 0px 0px 15px 15px;
+  -webkit-border-radius: 0px 0px 15px 15px;
+}
+#wrapper ul{
+    margin: 0 20px 10px 35px;
+    padding:0;
+    list-style-type: none
+}
+#wrapper ul li{
+    margin: 5px;
+    padding: 2px;
+    font: normal 11px Verdana, Arial, Helvetica, sans-serif;  
+    color: #333;
+    background: url(../i/ok.gif) center left no-repeat;
+    padding-left: 15px
+}
+#wrapper ul li:hover{
+    background-color:#f5f5f5;
+}
+#wrapper ul.boslukYok li{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-top:0;
+    margin-bottom:0;
+    border:1px solid #fff;
+}
+#wrapper ul li span.sekme{
+	margin-right: 30px;
+}
+
+h1 {
+  margin: 0 0 0px 20px;
+  font: bold 21px Georgia, "Times New Roman", Times, serif;
+  color: #cf282a;
+  position: fixed !important;
+  position: absolute;
+  top: 18px; 
+  left: 6px;
+  z-index: 2;
+}
+h2 {
+  margin: 20px 0 10px 20px;
+  font: bold 16px "Arial Narrow", Arial, Helvetica, sans-serif;
+  letter-spacing: normal;
+  color: #aaa;
+  border-bottom: solid 1px #ddd
+}
+h3 {
+  margin: 50px 0 5px 20px;
+  font: bold 12px tahoma, Arial, Helvetica, sans-serif;
+  letter-spacing: normal;
+  color: #00aa88;
+}
+
+a {color: #0000bb; text-decoration: none; border-bottom:1px solid #ddd }
+a:hover { color: #AA0000; text-decoration: none; border-bottom:1px solid #ccc }
+
+strong{
+    color: #666
+}
+
+em{
+    color: #59461b;
+    background-color: #ffffdd
+}
+
+abbr{
+    border-bottom: 1px dotted #666;
+    cursor: help;
+}
+
+
+div.img {
+    margin: 15px;
+    text-align: center;
+}
+div.img img {
+    margin-bottom: 2px;
+    padding: 2px;
+    border: 1px solid #eee
+}
+div.img small {
+    font: normal 10px Arial;
+    color: #666
+}
+
+p {
+  margin: 0 20px 10px 20px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #000;
+  line-height: 1.5em;
+}
+pre {
+  margin: 5px 0 10px 20px;
+  padding: 0px 20px 10px 20px;
+  background-color: #FAFAFA;
+  border: solid 1px #eee;
+  font-family: "Courier New", Courier, mono;
+  font-size: 11px;
+  color: #444;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+code {
+  font-family: "Courier New", Courier, mono;
+  font-size: 11px;
+  color: #AA0000;
+}
+code.kod {
+    display: block;
+    width: 98%;
+    padding: 5px 3px 5px 3px;
+    border: solid 1px #eee
+}
+
+#nav {
+  position: fixed !important;
+  position: absolute;
+  top: 38px; 
+  left: 20px;
+  width: 220px;
+
+  height: 81%;
+  overfloW: auto;
+
+  padding: 10px;
+  border: solid 3px #DDD;
+  background: #FFF;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #000;
+  line-height: 1.4em;
+  -moz-border-radius: 15px;
+}
+
+#nav ul {
+    margin: 0 7px 10px 5px;
+    padding: 0;
+    list-style-type: none
+}
+#nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+#nav h2 { margin: 10px 0 5px 0 }
+#nav a {
+  color: #777;
+  display: block;
+  text-decoration: none;
+  border:none;
+  padding: 3px 5px;
+}
+#nav a:hover {
+    color: #AA0000;
+    border:none;
+    background-color: #F5F5F5
+}
+#nav a span.dikkat {
+    color: #d40000;
+    margin-left: 25px;
+    font-size: 85%;
+}
+
+div#fonksiyonlar {
+    margin-left: 15px
+}
+div.uyari{
+  margin: 33px 20px 33px 20px;
+  padding: 10px;
+  border: 1px solid #f20000;
+  font: normal 14px Verdana, Arial, Helvetica, sans-serif;
+  background-color: #ffd9d9;
+  color: #333;
+  text-align: center
+}

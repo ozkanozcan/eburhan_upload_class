@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title> eburhan Upload class v1.6 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+  @import url(i/css.css);
+  @import url(shjs/sh_eburhan.css);
+</style>
+<script type="text/javascript" src="shjs/sh_main.min.js"></script>
+<script type="text/javascript" src="shjs/sh_php.min.js"></script>
+<script type="text/javascript" src="shjs/sh_html.min.js"></script>
+<script language="javascript">window.onload = sh_highlightDocument;</script>
+<link rel="shortcut icon" href="i/favicon.png" type="image/png" />
+</head>
+<body id="top">
+
+<h1>eburhan Upload class</h1>
+<div id="nav">
+  <h2>Tanıtım</h2>
+    <ul>
+      <li> <a href="#top">Ne işe yarar?</a> </li>
+      <li> <a href="#ozellikleri">Özellikleri</a> </li>
+      <li> <a href="#kullanimi">Kullanımı</a> </li>
+      <li> <a href="#versiyon">Versiyon geçmişi</a> </li>
+      <li> <a href="#lisans">Lisans bilgisi</a> </li>      
+    </ul>
+    
+  <h2>Fonksiyonlar</h2>
+    <ul> 
+        <li> Temel işlemler </li>
+        <ul>
+          <li> <a href="#upload">UPLOAD</a> </li>
+          <li> <a href="#yolDizin">yolDizin</a> </li>
+          <li> <a href="#baslat">baslat</a> </li>
+          <li> <a href="#bilgiVer">bilgiVer <span class="dikkat">&laquo;güncellendi&raquo;</span></a> </li>
+        </ul>
+
+        <li> Dosya işlemleri </li>
+        <ul>
+          <li> <a href="#minDosya">minDosya</a> </li>
+          <li> <a href="#maxDosya">maxDosya</a> </li>
+          <li> <a href="#minBoyut">minBoyut</a> </li>
+          <li> <a href="#maxBoyut">maxBoyut</a> </li>
+          <li> <a href="#tipYasak">tipYasak <span class="dikkat">&laquo;güncellendi&raquo;</span></a> </li>
+          <li> <a href="#tipKabul">tipKabul <span class="dikkat">&laquo;güncellendi&raquo;</span></a> </li>
+          <li> <a href="#yazUstune">yazUstune <span class="dikkat">&laquo;yeni&raquo;</span></a></li>
+        </ul>
+        
+        <li> İsimlendirme işlemleri </li>
+        <ul>
+          <li> <a href="#yeniAd">yeniAd</a> </li>
+          <li> <a href="#basaEk">basaEk</a> </li>
+          <li> <a href="#sonaEk">sonaEk</a> </li>  
+        </ul>
+
+        <li> Hata işlemleri </li>
+        <ul>
+		  <li> <a href="#ilkHata">ilkHata <span class="dikkat">&laquo;yeni&raquo;</span></a> </li>
+		  <li> <a href="#sonHata">sonHata</a> </li>
+          <li> <a href="#tumHata">tumHata</a> </li>
+        </ul>
+    </ul>
+</div>
+
+<div id="wrapper">
+
+    <h2 id="neiseyarar"> Ne işe yarar? </h2>
+    <p> <strong>eburhan Upload class</strong> ile sunucuya dosya veya dosyalar yükleyebilirsiniz. Nesne yönelimli olarak programlandığı için işlevseldir ve kullanımı son derece kolaydır. Birbirinden bağımsız uygulamalarınızda hiçbir sorun yaşamadan kullanabilirsiniz.  </p>
+
+    <h2 id="ozellikleri"> Özellikleri </h2>
+    <ul>
+      <li> Belirttiğiniz dosya türleri dışında dosyaların yüklenmesine izin vermez </li>
+      <li> Yüklenmek istenen dosyaların içerik türlerini <i>(mime types)</i> otomatik kontrol eder </li>
+      <li> Yüklenen dosyalar arasında "resim" dosyaları varsa, herbirinin gerçekten bir resim dosyası olup olmadığını otomatik olarak kontrol eder. </li>
+      <li> Yüklenen dosyaları istediğiniz klasöre kaydetmenize izin verir. Eğer klasör yoksa sizin yerinize oluşturmayı dener ve "chmod" ayarını yapmaya çalışır. </li>
+      <li> Yükleme klasöründe, daha önceden aynı isimde bir dosya varsa üzerine yazılıp yazılmayacağını ayarlamanıza imkan sağlar. </li>
+      <li> Aynı anda kaç adet dosyanın yükleneceğini ayarlayabilirsiniz. Örneğin; <em>tek bir yükleme işleminde en az 5, en fazla 15 dosya yüklenebilsin</em> gibi...</li>
+      <li> Yüklenen dosyaların boyutlarını sınırlandırabilirsiniz. Örneğin; <em>yüklenmek istenen herbir dosyanın boyutu en az 10, en fazla 100 KB olsun</em> gibi...</li>
+      <li> Yüklenen dosyaları yeniden isimlendirebilirsiniz. Ayrıca yüklenen her bir dosya için benzersiz isimler de oluşturabilirsiniz. </li>
+      <li> Dosya isimlerinin başına veya sonuna belirttiğiniz bir ifadeyi ekleyebilirsiniz. </li>
+      <li> Bütün kotroller sunucunun "geçiçi" klasöründe yapılır. Eğer herhangi bir sorun oluşmazsa, dosyaları belirlediğiniz klasöre istediğiniz zaman taşıyabilirsiniz. </li>
+      <li> Yüklenen herbir dosyaya ait ayrıntılı bilgiler alabilirsiniz. </li>
+    </ul>
+
+    <h2 id="kullanimi"> Kullanımı </h2>
+    <p> <strong>eburhan Upload class</strong>'ı kullanabilmek için ilk önce alttakine benzer bir <u>yükleme formu</u> hazırlamanız gerekmektedir. Yükleme formunun <code class="bold">action</code> kısmında, bu formdaki bilgilerin hangi dosyaya gönderileceği belirtilmelidir. </p>
+    
+<pre class="sh_html"><code>
+&lt;html&gt;
+&lt;body&gt;
+
+&lt;form method="post" action="yukle.php" enctype="multipart/form-data"&gt;
+    &lt;input name="dosyalar[]" type="file" /&gt;
+    &lt;br&gt;
+    &lt;input name="dosyalar[]" type="file" /&gt;
+    &lt;br&gt;
+    &lt;input name="dosyalar[]" type="file" /&gt;
+    &lt;br&gt;
+    &lt;button name="submit" type="submit"&gt;Yükle&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+    <div class="img"> 
+      <img src="i/ss_1.png" title="Yukarıdaki kodun ekran görüntüsü" /> 
+      <br />
+      <small>Yukarıdaki kodun ekran görüntüsü</small>
+    </div>
+    <p> Formu hazırladıktan sonra <strong>yukle.php</strong> dosyasında <strong>eburhan Upload class</strong>'ı çağırmanız ve kullanıma hazırlamanız gerekmektedir. Örnek kullanımı alttaki kodda görebilirsiniz. </p>
+
+<pre class="sh_php"><code>
+&lt;?php 
+  // sınıfı çağır 
+  require_once('eb.upload.php'); 
+
+  // yüklenecek dosyalar varsa devreye gir 
+  if( $_FILES )  
+  { 
+      // sınıfı hazırla 
+      $up = new UPLOAD( $_FILES['dosyalar'] ); 
+
+
+      // yüklenecek dosyalar hangi klasöre kayıt edilecek 
+      $up->yolDizin('upload'); 
+
+      // 100 KB'a kadar olanlara izin ver 
+      $up->maxBoyut(100); 
+
+      // izin verilecek dosya türleri 
+      $up->tipKabul('gif, jpg, png');
+
+      // aynı isimde dosyalar varsa üzerine yazma !
+      $up->yazUstune(false);
+
+
+      // yükleme işlemini başlat 
+      if( $up->baslat() === false ) {
+         // oluşan ilk hatayı göster
+         echo $up->ilkHata();
+      } else {
+         // dosyalar ile ilgili bilgiler ver
+         print '&lt;pre&gt;';
+         print_r( $up->bilgiVer() );
+         print '&lt;/pre&gt;'; 
+      }
+
+  } 
+?&gt;
+</code></pre>
+        
+  <h2 id="versiyon"> Versiyon Geçmişi </h2>
+    <p>
+      <strong>v1.6</strong>
+      <br /> - <em>tipYasak()</em>, <em>tipKabul()</em>, <em>yeniAd()</em> ve <em>sonaEk()</em> fonksiyonlarında optimizasyonlar yapıldı.
+      <br /> - <em>ilkHata()</em> isminde yeni bir fonksiyon eklendi. Bu fonksiyon, dosya yükleme sırasında oluşan hatalardan yalnızca ilkini geri döndürüyor.
+	  <br /> - <em>yazUstune()</em> isminde yeni bir fonksiyon eklendi. Bu fonksiyon sayesinde, aynı isme sahip dosyaların üzerine yazılıp yazılmayacağı kararını kullanıcı kendisi verebiliyor.
+      <br /> - <em>bilgiVer()</em> fonksiyonu ile alınan bilgilerde geliştirmeler yapıldı. Artık yüklenen dosyaların bilgileri arasında <i>içerik</i>, <i>durum</i> ve <i>mesaj</i> gibi bilgiler de yer alıyor.
+      <br /> - <em>tipYasak()</em> ve <em>tipKabul()</em> fonksiyonlarına "<i>ayirici</i>" isminde bir parametre eklendi. Bu sayede, dosya uzantılarını ayırmak için nasıl bir karakter <i>(, | # ...gibi)</i> kullanılacağını kullanıcı kendisi belirleyebiliyor.
+      <br /> - <em>_mimeKontrol()</em> isminde yeni bir fonksiyon eklendi. Bu fonksiyon, dosyaların içerik türünü <i>(mime type)</i> otomatik olarak kontrol ediyor.
+      <br /> - <em>_imgKontrol()</em> fonksiyonu geliştirildi. Eğer GD kütüphanesi yüklüyse, resimlerin geçersiz olup olmadıkları bu kütüphane ile daha garantili bir şekilde kontrol ediliyor.      
+    </p>
+    <p> 
+      <strong>v1.5</strong> 
+      <br /> - <em>_dosyaUzantisiParselle()</em> fonksiyonu optimize edildi. "Mustafa KIRIMLI"ya teşekkürler.
+      <br /> - <em>hataVar</em> değişkeni gereksiz görüldüğü için kaldırıldı.
+      <br /> - <em>_dosyalar()</em> fonksiyonu gereksiz görüldüğü için kaldırdı. Artık bu fonksiyonun görevini, sınıfın kurucu fonksiyonu olan <em>UPLOAD()</em> yapıyor.
+      <br /> - <em>_phpDurumMsj()</em> isimli yeni bir fonksiyon eklendi. Bu fonksiyonun görevi, upload işleminde PHP'nin geri döndürdüğü hata mesajlarını tutmak.
+      <br /> - Kurucu fonksiyon olan <em>UPLOAD()</em> içerisine bir "ön hata kontrolü" eklendi. Ayrıca bu fonksiyon içerisinde bazı küçük düzenlemeler yapıldı.
+      <br /> - <em>_dosyaIsmiTemizle()</em> fonksiyonunda kullanılan <abbr title="regular expressions">regex</abbr> şablonu değiştirildi.
+      <br /> - Yorumlama formatı değiştirilerek <a href="http://www.phpdoc.org">phpDocumentor</a> standardına yaklaşıldı.
+    </p>  
+    <p> 
+      <strong>v1.4</strong> 
+      <br /> - Tek bir dosya yüklenmek istendiğinde <em>_dosyalar()</em> fonksiyonu, dosya bilgilerini eksik alıyordu. Bu önemli sorun giderildi.
+    </p>  
+    <p> 
+      <strong>v1.3</strong> 
+      <br /> - <em>yeniAd(true)</em> fonksiyonu aynı isimli dosyaların benzersiz bir şekilde isimlendirilmesinde problem çıkartıyordu. Bu sorun giderildi.
+    </p>    
+    <p> 
+      <strong>v1.2</strong> 
+      <br /> - <em>bilgiVer()</em> isimli yeni bir fonksiyon eklendi.
+      <br /> - <em>_dosyaIsmiTemizle()</em> fonksiyonundaki isimlendirme problemleri giderildi
+    </p>
+    <p> 
+      <strong>v1.1</strong> 
+      <br /> - Geçersiz resim kontrolü yapan fonksiyondaki eksiklik giderildi
+    </p>
+    <p> 
+      <strong>v1.0</strong> 
+      <br /> - Henüz ilk versiyon :)
+    </p>
+
+    <h2 id="lisans"> Lisans Bilgisi </h2>
+    <p>Bu sınıf, GNU GPL (General Public License) altında dağıtılmaktadır. Sınıfı kullanmanız bunu kabul etmeniz anlamına gelir. Lisansa ait detaylı bilgi <strong>lisans.txt</strong> dosyasındadır.</p>
+
+    <div class="img"> 
+      <a href="http://www.eburhan.com/araclar/" title="eBurhan Araçları"><img src="i/eburhan-araclari.png" alt="eBurhan Araçları" /></a>
+    </div>
+    
+    <h2> Fonksiyonlar </h2>
+    <div id="fonksiyonlar">
+    <p> Fonksiyonlar, yükleme işlemi ile ilgili çeşitli ayarlamaları yapabilmenizi sağlarlar. Her fonksiyonun ayrı bir görevi vardır. Kullanmanıza izin verilen fonksiyonlar altta açıklanmıştır. Fonksiyonların çeşitli kullanım örneklerini <strong>ornekler</strong> klasöründe görebilirsiniz.  </p>
+<!-- ===== -->
+      <h3 id="upload"> UPLOAD </h3>
+      <p> Kurucu fonksiyondur. <strong>eburhan Upload class</strong>'ı kullanıma hazırlar. Aynı zamanda hangi dosyaların yükleneceğini belirtmenizi sağlar. </p>
+<pre class="sh_php"><code>
+$up->new UPLOAD( $_FILES['dosyalar'] );
+</code></pre>
+      <p> <code>$_FILES['dosyalar']</code> ifadesi, yükleme formundan gelen dosyaları yakalamaktadır. <code>$up</code> ifadesi bir değişken ismi olup farklı bir isim verebilirsiniz. </p>
+
+<!-- ===== -->
+      <h3 id="yolDizin"> yolDizin </h3>
+      <p> Yüklenecek olan dosyaların hangi klasör altına kaydedileceğini belirtir. Belirtilen klasör yoksa oluşturmayı dener. Belirtilen klasör var ama yazılabilir değilse, yazılabilir hale getirir. </p>
+<pre class="sh_php"><code>
+$up->yolDizin( './root/upload/' );
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="baslat"> baslat </h3>
+      <p> Dosyaların yüklenme işlemini tamamlamakla görevlidir. Bu fonksiyonu çalıştırmadan, dosyaları sunucuya yüklemiş sayılmazsınız. <em>Dolayısıyla her dosya yükleme işleminde bu fonksiyonu çağırmanız gerekmektedir.</em> Bu fonksiyon, yükleme işlemleri sırasında herhangi bir hata oluşmuşsa geriye <strong>FALSE</strong> değeri, herhangi bir hata oluşmamışsa <strong>TRUE</strong> değeri döndürür. Fonksiyonu alttaki gibi kullanabilirsiniz. </p>
+<pre class="sh_php"><code>
+&lt;?php
+    // yükleme işlemini başlat
+    if( $up->baslat() == TRUE ) 
+    {
+       echo 'yükleme başarılı';
+    }
+    else 
+    {
+       echo 'yükleme sırasında hata oluştu !';
+    }
+?&gt; 
+</code></pre>
+
+
+<!-- ===== -->
+      <h3 id="bilgiVer"> bilgiVer </h3>
+      <p> Yüklenen her bir dosyanın bilgilerini göstermekle görevlidir. Bu fonksiyon ile yükleme işlemi tamamlanan bir dosyanın <em>yeni ismini</em>, <em>eski ismini</em>, <em>içerik türünü</em>, <em>dosya boyutunu</em>, <em>klasör adresini</em> ve <em>durum mesajını</em> öğrenebilirsiniz. Bu fonksiyonun geriye döndürdüğü değer tipi <strong>ARRAY</strong>'dır. Fonksiyonu alttaki gibi kullanabilirsiniz. </p>
+<pre class="sh_php"><code>
+&lt;?php
+    // yükleme işlemini başlat
+    if( $up->baslat() == TRUE ) 
+    {
+       print 'Dosyaların yüklenme durumu: <br />';
+
+       print '&lt;pre&gt;';
+       print_r( $up->bilgiVer() );
+       print '&lt;/pre&gt;';
+    }
+    else 
+    {
+       echo 'Yükleme sırasında bir hata oluşmuş !';
+    }
+?&gt; 
+</code></pre>
+    <div class="img"> 
+      <img src="i/ss_2.png" title="fonksiyonun ürettiği örnek bir çıktı" /> 
+      <br />
+      <small>bilgiVer fonksiyonunun ürettiği örnek bir çıktı</small>
+    </div>
+
+
+<!-- ===== -->
+      <h3 id="minDosya"> minDosya </h3>
+      <p> Yüklenecek minimun dosya sayısını bildirir. Örneğin kullanıcının <u>en az</u> 3 dosya yüklemesini istiyorsanız bu fonksiyonu kullanmalısınız. </p>
+<pre class="sh_php"><code>
+$up->minDosya( 3 );
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="maxDosya"> maxDosya </h3>
+      <p> Yüklenecek maksimum dosya sayısını bildirir. Örneğin kullanıcının <u>en fazla</u> 10 dosya yüklemesini istiyorsanız bu fonksiyonu kullanmalısınız. </p>
+<pre class="sh_php"><code>
+$up->maxDosya( 10 );
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="minBoyut"> minBoyut </h3>
+      <p> Yüklenecek dosyaların sahip olması gereken <u>en az</u> dosya boyutu değeridir. Örneğin 50 KB altındaki dosyaların yüklenmesini istemiyorsanız bu fonksiyonu kullanmalısınız. Bu fonksiyon birim olarak KiloBayt (KB) birimini kullanır. </p>
+<pre class="sh_php"><code>
+$up->minBoyut( 50 );
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="maxBoyut"> maxBoyut </h3>
+      <p> Yüklenecek dosyaların sahip olması gereken <u>en fazla</u> dosya boyutu değeridir. Örneğin 1 MB üstündeki dosyaların yüklenmesini istemiyorsanız bu fonksiyonu kullanmalısınız. Bu fonksiyon birim olarak KiloBayt (KB) birimini kullanır. </p>
+<pre class="sh_php"><code>
+$up->maxBoyut( 1000 );
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="tipYasak"> tipYasak </h3>
+      <p> Belirtmiş olduğunuz uzantılara sahip dosya türlerinin yüklenmesini engeller. Örneğin alttaki kod; uzantısı <strong>php</strong>, <strong>exe</strong> ve <strong>bat</strong> olan dosyaları yasaklar. Bunlarında haricinde diğer tüm dosya türlerine izin verir. </p>
+<pre class="sh_php"><code>
+$up->tipYasak( 'php, exe, bat' );
+</code></pre>
+      <p> Dosya uzantılarını ayırmak için kullanılacak karaktere kendiniz karar verebilirsiniz. Örneğin dosya uzantılarını yukarıdaki örnekte olduğu gibi virgül (,) ile ayırmak yerine düz çizgi (|) ile ayırmak isterseniz, bu fonksiyonu şöyle de kullanabilirsiniz: </p>
+<pre class="sh_php"><code>
+$up->tipYasak( 'php|exe|bat' , '|');
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="tipKabul"> tipKabul </h3>
+      <p> Yalnızca belirtmiş olduğunuz uzantılara sahip dosya türlerini yükler. Örneğin alttaki kod, uzantısı <strong>zip</strong> ve <strong>rar</strong> olan dosyaları yükler. Bunlarında haricinde diğer tüm dosya türlerinin yüklenmesini engeller. </p>
+<pre class="sh_php"><code>
+$up->tipKabul( 'zip, rar' );
+</code></pre>
+      <p> Dosya uzantılarını ayırmak için kullanılacak karaktere kendiniz karar verebilirsiniz. Örneğin dosya uzantılarını yukarıdaki örnekte olduğu gibi virgül (,) ile ayırmak yerine diyez (#) ile ayırmak isterseniz, bu fonksiyonu şöyle de kullanabilirsiniz: </p>
+<pre class="sh_php"><code>
+$up->tipYasak( 'zip#rar' , '#');
+</code></pre>
+
+      <div class="uyari">
+        <strong>tipYasak</strong> ve <strong>tipKabul</strong> fonksiyonlarını birarada kullanmayınız !
+      </div>
+
+<!-- ===== -->
+      <h3 id="yazUstune"> yazUstune </h3>
+      <p> Yüklenecek dosyalar arasında, <a href="#yolDizin">yolDizin</a> fonksiyonu ile belirttiğiniz klasörde aynı isimde bir dosya bulunuyorsa, üzerine yazılıp yazılmayacağını belirtmenizi sağlar. Parametre olarak <strong>true</strong> değerini aldığında dosyaların üzerine yazılır, <strong>false</strong> değerini aldığında ise aynı isimli dosyaların üzerine yazılmayacaktır.</p>
+<pre class="sh_php"><code>
+// aynı isimde dosyalar varsa üzerine yazma
+$up->yazUstune(false);
+</code></pre>
+      <p>NOT: Bu fonksiyon varsayılan olarak <strong>false</strong> değeri almış gibi çalışır...</p>
+
+
+<!-- ===== -->
+      <h3 id="yeniAd"> yeniAd </h3>
+      <p> Yüklenen dosyanın ismini değiştirmenizi sağlar. Yeni isim atarken geçersiz karakterler ($,%,&,+... gibi) girerseniz otomatik olarak düzeltir. </p>
+<pre class="sh_php"><code>
+// yüklenen dosyanın ismini 'yeni_isim' yap 
+$up->yeniAd( 'yeni_isim' ); 
+</code></pre>
+
+      <p> Ayrıca bu fonksiyon, birden fazla dosya yüklerken herbir dosyaya rasgele bir isim de atayabilir. 32 karakterli benzersiz bir isim oluşturmak için, bu fonksiyona parametre olarak <strong>true</strong> bilgisini girmeniz yeterli olacaktır.  </p>
+<pre class="sh_php"><code>
+// herbir dosyaya benzersiz isim ata 
+$up->yeniAd( true ); 
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="basaEk"> basaEk </h3>
+      <p> Yüklenen dosyaların isminin <u>önüne</u> bir ifade eklemenizi sağlar. Örneğin yüklenecek bir dosyanın ismi <strong>resim.gif</strong> olsun. Bu fonksiyonu kullanarak <strong>yeni_resim.gif</strong> şeklinde bir isimlendirme yapabilirsiniz. </p>
+<pre class="sh_php"><code>
+// yüklenen dosyaların isimlerinin önüne 'yeni' ifadesi ekle 
+$up->basaEk( 'yeni' );
+</code></pre>
+
+      <p>Bu fonksiyonun bir görevi daha vardır. Örneğin 5 adet dosya yükleyeceksiniz. Bu dosyaların isimlerini numaralandırmak istiyorsunuz. Eğer bu fonksiyona parametre olarak <strong>true</strong> bilgisini girerseniz, dosyaların isimlerinin önüne sırasıyla 1, 2, 3, 4 ve 5 numaraları eklenecektir. </p>
+<pre class="sh_php"><code>
+// her bir dosya isminin önüne sıralı numara ekle 
+$up->basaEk( true );
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="sonaEk"> sonaEk </h3>
+      <p> Yüklenen dosyaların isminin <u>sonuna</u> bir ifade eklemenizi sağlar. Örneğin yüklenecek bir dosyanın ismi <strong>resim.gif</strong> olsun. Bu fonksiyonu kullanarak <strong>resim_yeni.gif</strong> şeklinde bir isimlendirme yapabilirsiniz. </p>
+<pre class="sh_php"><code>
+// yüklenen dosyaların isimlerinin sonuna 'yeni' ifadesi ekle
+$up->sonaEk( 'yeni' ); 
+</code></pre>      
+
+      <p>Bu fonksiyonun bir görevi daha vardır. Örneğin 5 adet dosya yükleyeceksiniz. Bu dosyaların isimlerini numaralandırmak istiyorsunuz. Eğer bu fonksiyona parametre olarak <strong>true</strong> bilgisini girerseniz, dosyaların isimlerinin sonuna sırasıyla 1, 2, 3, 4 ve 5 numaraları eklenecektir. Yüklenecek dosyaları <em>resim_1.gif, resim_2.gif, resim_3.gif...</em> şeklinde isimlendirmek için bu fonksiyon idealdir. </p>
+<pre class="sh_php"><code>
+// her bir dosya isminin sonuna sıralı numara ekle
+$up->sonaEk( true );
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="ilkHata"> ilkHata </h3>
+      <p> Yükleme işlemleri sırasında herhangi bir hata oluşursa bu fonksiyon ile <u>ilk</u> oluşan hatayı alabilirsiniz. Fonksiyonu alttaki gibi kullanabilirsiniz.  <p>
+<pre class="sh_php"><code>
+&lt;?php
+    // yükleme işlemini başlat
+    if( $up->baslat() == FALSE )
+    {
+       // oluşan hatalardan yalnızca ilkini yazdır
+       echo $up->ilkHata();
+    }
+?&gt;
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="sonHata"> sonHata </h3>
+      <p> Yükleme işlemleri sırasında herhangi bir hata oluşursa bu fonksiyon ile <u>en son</u> oluşan hatayı alabilirsiniz. Fonksiyonu alttaki gibi kullanabilirsiniz.  <p> 
+<pre class="sh_php"><code>
+&lt;?php
+    // yükleme işlemini başlat
+    if( $up->baslat() == FALSE ) 
+    {
+       // oluşan hatalardan yalnızca en sonuncusunu yazdır
+       echo $up->sonHata();
+    }
+?&gt;
+</code></pre>
+
+<!-- ===== -->
+      <h3 id="tumHata"> tumHata </h3>
+      <p> Yükleme işlemleri sırasında ne kadar hata oluştuysa hepsini bu fonksiyonla alabilirsiniz. Bu fonksiyonun geriye döndürdüğü değer tipi <strong>ARRAY</strong>'dır. Bu yüzden bu fonksiyonu <strong><code>foreach</code></strong> döngüsüyle işlemeniz gerekir. Fonksiyonu alttaki gibi kullanabilirsiniz.<p> 
+<pre class="sh_php"><code>
+&lt;?php
+// yükleme işlemini başlat
+if( $up->baslat() == FALSE ) 
+{
+   // oluşan tüm hataları alt alta listele
+   foreach( $up->tumHata() as $hata )
+   {
+        echo $hata.' &lt;br /&gt;';
+   }
+}
+?&gt;
+</code></pre>
+
+    </div>  <!-- fonksiyonlar bitti -->
+</div>
+
+</body>
+</html>
